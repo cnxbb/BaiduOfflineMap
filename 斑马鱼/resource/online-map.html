@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>百度地图 JavaScript API离线版</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+		<!--
+		字体图标另外加载 使用: 
+		https://useiconic.com/open#icons
+		<span class="oi oi-info" title="star" aria-hidden="true"></span>
+		-->
+		<link rel="stylesheet" href="static/css/open-iconic-bootstrap.css">
+    <style>
+		#map-btns{
+			position: absolute;
+			z-index: 10;
+			top: 60px;
+			left:370px;
+		}
+		#map-search{
+			position: absolute;
+			z-index: 10;
+			top: 60px;
+			left:60px;
+			width:300px;
+		}
+		#down-modal h4{
+			font-size: 15px;
+		}
+		#down-modal h4 > span{
+			font-size: 14px;
+			color:#007BFF;
+		}
+		</style>
+		<!-- jQuery first, Bootstrap JS-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IhbuFX8xxTCkTDMIrBNxMOeHnrPQNqFA"></script>
+		
+		<script src="static/js/DrawingManager_one_rect.js"></script>
+		<script src="static/js/BoundsTiles.js"></script>
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/layer.js"></script>
+  </head>
+  <body>
+		<header class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row">
+			<a class="navbar-brand" href="#">
+				<img src="static/img/logo-tool.jpg" width="30" height="30" class="d-inline-block align-top" /> <span id="title-text">斑马鱼</span>
+			</a>
+			<ul class="navbar-nav nav flex-row ml-md-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="offline-api.html"><span class="oi oi-aperture" title="offline"></span> 离线API</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="online-api.html"><span class="oi oi-globe" title="online"></span> 在线API</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" href="online-map.html" ><span class="oi oi-map" title="map"></span> 下载地图</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="help.html"><span class="oi oi-document" title="help"></span> 在线帮助</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="javascript:window.about();" id="nav-about"><span class="oi oi-info" title="about"></span> 关于</a>
+				</li>
+			</ul>
+		</header>
+	
+		<div id="main-content" style="width:100%;min-height:500px;overflow:hidden;">
+			<!-- 百度地图下载 -->
+			<div style="margin-top:200px;width:100%;text-align:center"><h1>百度地图需要在联网的情况下，才能下载！</h1></div>
+		</div>
+		
+		<!-- 地图按钮 -->
+		<div id="map-btns" class="btn-group">
+			<button type="button" id="map-drag-btn" class="btn btn-warning btn-sm"><span class="oi oi-move" title="star" aria-hidden="true"></span> 拖动地图</button>
+			<button type="button" id="map-down-btn" class="btn btn-secondary btn-sm"><span class="oi oi-crop" title="star" aria-hidden="true"></span> 区域下载</button>
+			<button type="button" id="map-point-btn" class="btn btn-secondary btn-sm"><span class="oi oi-map-marker" title="star" aria-hidden="true"></span> 取坐标点</button>
+		</div>
+		<!-- 地图搜索 -->
+		<div id="map-search" class="input-group input-group-md">
+			<input id="search_map_value" type="text" class="form-control form-control-sm" placeholder="地名，关键字..." value="">
+			<span class="input-group-btn"><button id="search_map_btn" type="button" class="btn btn-warning btn-sm">搜索</button></span>
+		</div>
+    <!-- 下载页面 -->
+    <div class="modal fade" id="down-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle"><span class="oi oi-collapse-down" title="download" aria-hidden="true"></span> 下载瓦片</h5>
+          </div>
+          <div class="modal-body">
+							<div class="row">
+								<div class="col-7" style="max-height:190px;overflow-y:auto">
+								<table class="table table-sm table-hover">
+									<thead>
+										<tr>
+											<th scope="col"><input type="checkbox" id="chk-select-all" value="1"/></th>
+											<th scope="col">缩放级别</th>
+											<th scope="col">瓦片个数</th>
+										</tr>
+									</thead>
+									<tbody id="table-body-tiles">
+									</tbody>
+								</table>
+								</div>
+								<div class="col-5">
+									<h4>区域中心是：<br/><span id="tiles-local">...</span></h4>
+									<h4>已选瓦片个数：<span id="tiles-count">0</span></h4>
+									<h4>预计占用空间：<span id="tiles-size">0</span></h4>
+									<h4>瓦片信息描述：<input type="text" class="form-control form-control-sm" id="tiles-desc" value="" placeholder="请取个名字"/></h4>
+									<h4 id="tiles-process">收集信息：<span id="tiles-process-per"></span></h4>
+								</div>
+								<div class="col-12">
+								  <form class="form-inline">
+									<div class="form-group
+									<label for="tiles-dir">瓦片存储目录 </label> 
+									<input type="text" class="form-control form-control-sm" id="tiles-dir" value="" readonly="true" style="width:300px;" placeholder="请选择目录" />
+									</div> 
+									<button type="button" class="btn btn-primary btn-sm" id="tiles-dir-btn">选择...</button>
+									</form>
+								</div>
+							</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="down-confirm">确认</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+		<script>
+		//浏览器窗口大小改变
+    $(window).resize(function() {
+				resetHeight("main-content");
+    });
+		//地图图层高度
+		function resetHeight(id){
+			var h = $(window).height() - 60; //大致的高度
+			if( h<500 ) h = 500;
+			$('#'+id).css("min-height", h+"px");
+		}
+		resetHeight("main-content");
+		</script>
+		<script src="static/js/app-map.js"></script>		
+  </body>
+</html>

@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>百度地图 JavaScript API离线版</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+		<!--
+		字体图标另外加载 使用: 
+		https://useiconic.com/open#icons
+		<span class="oi oi-info" title="star" aria-hidden="true"></span>
+		-->
+		<link rel="stylesheet" href="static/css/open-iconic-bootstrap.css">
+    <style>
+		.card-header, .card-header h5{ padding:0;margin0; }
+		.card-body a{font-size:14px;}
+		#linklist{ overflow-x:hidden; overflow-y:auto;}
+		</style>
+		<!-- jQuery first, Bootstrap JS-->
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/layer.js"></script>
+  </head>
+  <body>
+		<header class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row">
+			<a class="navbar-brand" href="#">
+				<img src="static/img/logo-tool.jpg" width="30" height="30" class="d-inline-block align-top" /> <span id="title-text">斑马鱼</span>
+			</a>
+			<ul class="navbar-nav nav flex-row ml-md-auto">
+				<li class="nav-item">
+					<a class="nav-link active" href="offline-api.html"><span class="oi oi-aperture" title="offline"></span> 离线API</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="online-api.html"><span class="oi oi-globe" title="online"></span> 在线API</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="online-map.html" ><span class="oi oi-map" title="map"></span> 下载地图</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="help.html"><span class="oi oi-document" title="help"></span> 在线帮助</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="javascript:window.about();" id="nav-about"><span class="oi oi-info" title="about"></span> 关于</a>
+				</li>
+			</ul>
+		</header>
+	
+		<div id="main-content">
+			<table width="100%" height="100%" border="0">
+				<tr>
+				<td width="245" id="listTD" valign="top">
+<!-- BEGIN -->				
+
+<div id="linklist">
+ <div class="card">
+  <div class="card-header" id="heading1">
+   <h5 class="mb-0">
+    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+     地图示例
+    </button>
+   </h5>
+  </div>
+  <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#linklist">
+   <div class="card-body">
+   <div><a href="../bmap-demo/001/1.html" onclick="openUrl('../bmap-demo/001/1.html')" target="mapFrame">地图展示</a></div>
+   <div><a href="../bmap-demo/001/2.html" onclick="openUrl('../bmap-demo/001/2.html')" target="mapFrame">同时加载两个地图</a></div>
+   <div><a href="../bmap-demo/001/3.html" onclick="openUrl('../bmap-demo/001/3.html')" target="mapFrame">设置地图最大、最小级别</a></div>
+   <div><a href="../bmap-demo/001/4.html" onclick="openUrl('../bmap-demo/001/4.html')" target="mapFrame">移动地图</a></div>
+   <div><a href="../bmap-demo/001/5.html" onclick="openUrl('../bmap-demo/001/5.html')" target="mapFrame">缩放地图</a></div>
+   <div><a href="../bmap-demo/001/6.html" onclick="openUrl('../bmap-demo/001/6.html')" target="mapFrame">拖拽地图</a></div>
+   <div><a href="../bmap-demo/001/7.html" onclick="openUrl('../bmap-demo/001/7.html')" target="mapFrame">设置地图显示范围</a></div>
+   <div><a href="../bmap-demo/001/8.html" onclick="openUrl('../bmap-demo/001/8.html')" target="mapFrame">获取地图显示范围</a></div>
+   <div><a href="../bmap-demo/001/9.html" onclick="openUrl('../bmap-demo/001/9.html')" target="mapFrame">测距</a></div>
+   </div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="card-header" id="heading2">
+   <h5 class="mb-0">
+    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+     地图控件示例
+    </button>
+   </h5>
+  </div>
+  <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#linklist">
+   <div class="card-body">
+   <div><a href="../bmap-demo/002/1.html" onclick="openUrl('../bmap-demo/002/1.html')" target="mapFrame">添加/删除工具条、比例尺控件</a></div>
+   <div><a href="../bmap-demo/002/2.html" onclick="openUrl('../bmap-demo/002/2.html')" target="mapFrame">添加/删除地图类型、缩略图控件</a></div>
+   <div><a href="../bmap-demo/002/3.html" onclick="openUrl('../bmap-demo/002/3.html')" target="mapFrame">添加版权控件</a></div>
+   <div><a href="../bmap-demo/002/4.html" onclick="openUrl('../bmap-demo/002/4.html')" target="mapFrame">添加自定义控件</a></div>
+   </div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="card-header" id="heading3">
+   <h5 class="mb-0">
+    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+     覆盖物示例
+    </button>
+   </h5>
+  </div>
+  <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#linklist">
+   <div class="card-body">
+   <div><a href="../bmap-demo/003/1.html" onclick="openUrl('../bmap-demo/003/1.html')" target="mapFrame">添加/删除覆盖物</a></div>
+   <div><a href="../bmap-demo/003/2.html" onclick="openUrl('../bmap-demo/003/2.html')" target="mapFrame">折线上添加方向箭头</a></div>
+   <div><a href="../bmap-demo/003/3.html" onclick="openUrl('../bmap-demo/003/3.html')" target="mapFrame">添加动画标注点</a></div>
+   <div><a href="../bmap-demo/003/4.html" onclick="openUrl('../bmap-demo/003/4.html')" target="mapFrame">设置点的新图标</a></div>
+   <div><a href="../bmap-demo/003/5.html" onclick="openUrl('../bmap-demo/003/5.html')" target="mapFrame">设置点是否可拖拽</a></div>
+   <div><a href="../bmap-demo/003/6.html" onclick="openUrl('../bmap-demo/003/6.html')" target="mapFrame">设置线、面可编辑</a></div>
+   <div><a href="../bmap-demo/003/7.html" onclick="openUrl('../bmap-demo/003/7.html')" target="mapFrame">设置覆盖物的显示与隐藏</a></div>
+   <div><a href="../bmap-demo/003/8.html" onclick="openUrl('../bmap-demo/003/8.html')" target="mapFrame">文本标注</a></div>
+   <div><a href="../bmap-demo/003/9.html" onclick="openUrl('../bmap-demo/003/9.html')" target="mapFrame">带文字标签的覆盖物</a></div>
+   <div><a href="../bmap-demo/003/10.html" onclick="openUrl('../bmap-demo/003/10.html')" target="mapFrame">获取覆盖物的信息</a></div>
+   <div><a href="../bmap-demo/003/11.html" onclick="openUrl('../bmap-demo/003/11.html')" target="mapFrame">添加多个标注点</a></div>
+   <div><a href="../bmap-demo/003/12.html" onclick="openUrl('../bmap-demo/003/12.html')" target="mapFrame">从多个点删除指定点</a></div>
+   <div><a href="../bmap-demo/003/13.html" onclick="openUrl('../bmap-demo/003/13.html')" target="mapFrame">加载闪烁点</a></div>
+   <div><a href="../bmap-demo/003/14.html" onclick="openUrl('../bmap-demo/003/14.html')" target="mapFrame">加载海量点</a></div>
+   <div><a href="../bmap-demo/003/15.html" onclick="openUrl('../bmap-demo/003/15.html')" target="mapFrame">添加弧线</a></div>
+   <div><a href="../bmap-demo/003/16.html" onclick="openUrl('../bmap-demo/003/16.html')" target="mapFrame">添加椭圆</a></div>
+   <div><a href="../bmap-demo/003/18.html" onclick="openUrl('../bmap-demo/003/18.html')" target="mapFrame">添加自定义覆盖物</a></div>
+   <div><a href="../bmap-demo/003/19.html" onclick="openUrl('../bmap-demo/003/19.html')" target="mapFrame">添加/删除地面叠加层</a></div>
+   <div><a href="../bmap-demo/003/20.html" onclick="openUrl('../bmap-demo/003/20.html')" target="mapFrame">点聚合</a></div>
+   <div><a href="../bmap-demo/003/21.html" onclick="openUrl('../bmap-demo/003/21.html')" target="mapFrame">热力图功能示例</a></div>
+   <div><a href="../bmap-demo/003/22.html" onclick="openUrl('../bmap-demo/003/22.html')" target="mapFrame">矢量图</a></div>
+   </div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="card-header" id="heading4">
+   <h5 class="mb-0">
+    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+     信息窗口示例
+    </button>
+   </h5>
+  </div>
+  <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#linklist">
+   <div class="card-body">
+   <div><a href="../bmap-demo/004/1.html" onclick="openUrl('../bmap-demo/004/1.html')" target="mapFrame">纯文本的信息窗口</a></div>
+   <div><a href="../bmap-demo/004/2.html" onclick="openUrl('../bmap-demo/004/2.html')" target="mapFrame">添加复杂内容的信息窗口</a></div>
+   <div><a href="../bmap-demo/004/4.html" onclick="openUrl('../bmap-demo/004/4.html')" target="mapFrame">给多个点添加信息窗口</a></div>
+   <div><a href="../bmap-demo/004/5.html" onclick="openUrl('../bmap-demo/004/5.html')" target="mapFrame">获取信息窗口的信息</a></div>
+   </div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="card-header" id="heading5">
+   <h5 class="mb-0">
+    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse5" aria-expanded="true" aria-controls="collapse5">
+     右键菜单示例
+    </button>
+   </h5>
+  </div>
+  <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#linklist">
+   <div class="card-body">
+   <div><a href="../bmap-demo/005/1.html" onclick="openUrl('../bmap-demo/005/1.html')" target="mapFrame">给地图添加右键菜单</a></div>
+   <div><a href="../bmap-demo/005/2.html" onclick="openUrl('../bmap-demo/005/2.html')" target="mapFrame">给覆盖物添加右键菜单</a></div>
+   </div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="card-header" id="heading6">
+   <h5 class="mb-0">
+    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
+     鼠标操作示例
+    </button>
+   </h5>
+  </div>
+  <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#linklist">
+   <div class="card-body">
+   <div><a href="../bmap-demo/006/1.html" onclick="openUrl('../bmap-demo/006/1.html')" target="mapFrame">设置地图默认的鼠标样式</a></div>
+   <div><a href="../bmap-demo/006/2.html" onclick="openUrl('../bmap-demo/006/2.html')" target="mapFrame">鼠标滚轮缩放地图</a></div>
+   <div><a href="../bmap-demo/006/3.html" onclick="openUrl('../bmap-demo/006/3.html')" target="mapFrame">鼠标拉框放大地图</a></div>
+   <div><a href="../bmap-demo/006/4.html" onclick="openUrl('../bmap-demo/006/4.html')" target="mapFrame">鼠标测距</a></div>
+   <div><a href="../bmap-demo/006/5.html" onclick="openUrl('../bmap-demo/006/5.html')" target="mapFrame">单击获取点击的经纬度</a></div>
+   <div><a href="../bmap-demo/006/6.html" onclick="openUrl('../bmap-demo/006/6.html')" target="mapFrame">鼠标绘制工具</a></div>
+   </div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="card-header" id="heading7">
+   <h5 class="mb-0">
+    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse7" aria-expanded="true" aria-controls="collapse7">
+     添加层示例
+    </button>
+   </h5>
+  </div>
+  <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#linklist">
+   <div class="card-body">
+   <div><a href="../bmap-demo/007/1.html" onclick="openUrl('../bmap-demo/007/1.html')" target="mapFrame">添加清华校园微观图</a></div>
+   <div><a href="../bmap-demo/007/2.html" onclick="openUrl('../bmap-demo/007/2.html')" target="mapFrame">自定义网格</a></div>
+   </div>
+  </div>
+ </div>
+  <div class="card">
+  <div class="card-header" id="heading8">
+   <h5 class="mb-0">
+    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse8" aria-expanded="true" aria-controls="collapse8">
+     事件示例
+    </button>
+   </h5>
+  </div>
+  <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#linklist">
+   <div class="card-body">
+   <div><a href="../bmap-demo/008/1.html" onclick="openUrl('../bmap-demo/008/1.html')" target="mapFrame">图块加载完毕</a></div>
+   <div><a href="../bmap-demo/008/2.html" onclick="openUrl('../bmap-demo/008/2.html')" target="mapFrame">地图单击事件</a></div>
+   <div><a href="../bmap-demo/008/3.html" onclick="openUrl('../bmap-demo/008/3.html')" target="mapFrame">给覆盖物注册事件</a></div>
+   <div><a href="../bmap-demo/008/4.html" onclick="openUrl('../bmap-demo/008/4.html')" target="mapFrame">传递事件参数</a></div>
+   <div><a href="../bmap-demo/008/5.html" onclick="openUrl('../bmap-demo/008/5.html')" target="mapFrame">为多个点注册单击事件</a></div>
+   <div><a href="../bmap-demo/008/6.html" onclick="openUrl('../bmap-demo/008/6.html')" target="mapFrame">注销事件</a></div>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+<!-- END -->
+				</td>
+				<td>
+					<iframe id="iframe" name="mapFrame" src="../bmap-demo/001/1.html" height="100%" width="100%" style="width:100%;height:100%;border:0"></iframe>
+				</td>
+				</tr>
+			</table>
+		</div>
+
+		<script>
+		//浏览器窗口大小改变
+    $(window).resize(function() {
+				resetHeight("main-content");
+    });
+		//地图图层高度
+		function resetHeight(id){
+			var h = $(window).height() - 60; //大致的高度
+			if( h<400 ) h = 400;
+			$('#'+id).css("min-height", h+"px");
+			//$('#iframe').css("width", "100%");
+			$('#iframe').css("height", (h-5)+"px");
+			$('#linklist').css("max-height", (h-5)+"px");
+		}
+		resetHeight("main-content");
+		
+		//检查新版本
+		var version1 = window.getVersion();
+		var userNo = window.getUserNo();
+		//alert(version1 + ' '+ userNo);
+		$.get('http://regno.xiaoguo123.com/server/soft/version?softId=1&userNo='+userNo, function(data,status){
+		    console.log(data);
+		    if( data.success != 'undefined' && data.success ) {
+		        //alert(data.obj.version +' '+ version1);
+		        if( data.obj.version != version ) {
+		            layer.confirm('发现新版本，是否去看看?<br>'+data.obj.modNote, function(index){
+		                layer.close(index);
+		                window.openUrl(data.obj.home);
+		            });
+		        }
+		        else if( data.obj.showAd == 1 ) {
+		            layer.confirm( data.obj.adNote, function(index){
+		                layer.close(index);
+		                window.openUrl(data.obj.adUrl);
+		            });
+		        }
+		        
+		    }
+		    
+		    
+		});
+		
+		</script>		
+  </body>
+</html>
