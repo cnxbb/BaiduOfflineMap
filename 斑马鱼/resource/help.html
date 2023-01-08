@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>百度地图 JavaScript API离线版</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+		<!--
+		字体图标另外加载 使用: 
+		https://useiconic.com/open#icons
+		<span class="oi oi-info" title="star" aria-hidden="true"></span>
+		-->
+		<link rel="stylesheet" href="static/css/open-iconic-bootstrap.css">
+    <style>
+
+		</style>
+		<!-- jQuery first, Bootstrap JS-->
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/layer.js"></script>
+  </head>
+  <body>
+		<header class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row">
+			<a class="navbar-brand" href="#">
+				<img src="static/img/logo-tool.jpg" width="30" height="30" class="d-inline-block align-top" /> <span id="title-text">斑马鱼</span>
+			</a>
+			<ul class="navbar-nav nav flex-row ml-md-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="offline-api.html"><span class="oi oi-aperture" title="offline"></span> 离线API</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="online-api.html"><span class="oi oi-globe" title="online"></span> 在线API</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="online-map.html" ><span class="oi oi-map" title="map"></span> 下载地图</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" href="help.html"><span class="oi oi-document" title="help"></span> 在线帮助</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="javascript:window.about();" id="nav-about"><span class="oi oi-info" title="about"></span> 关于</a>
+				</li>
+			</ul>
+		</header>
+	
+		<div id="main-content">
+			<iframe id="iframe" src="http://www.xiaoguo123.com/c/yuanchuang/offlinemap/?client" height="100%" width="100%" style="width:100%;height:100%;border:0"></iframe>
+		</div>
+
+		<script>
+		//浏览器窗口大小改变
+    $(window).resize(function() {
+				resetHeight("main-content");
+    });
+		//地图图层高度
+		function resetHeight(id){
+			var h = $(window).height() - 65; //大致的高度
+			if( h<500 ) h = 500;
+			$('#'+id).css("min-height", h+"px");
+			$('#iframe').css("width", "100%");
+			$('#iframe').css("height", h+"px");
+		}
+		resetHeight("main-content");
+		</script>		
+  </body>
+</html>
