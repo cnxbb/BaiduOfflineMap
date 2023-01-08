@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Offline Map</title>
+<style type="text/css">
+    body, html,#offlinemap, #tab, #mapfrm {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    #menu{height:100%;overflow-y:auto}
+    td{font-size:14px}
+    h4{margin:0;}
+    .anchorBL{display:none;}
+
+    #offlinemap {
+        display:block;
+        position:fixed;
+        top:0px;
+        left:0px;
+        right:0px;
+        bottom:0px;
+
+    }
+</style>
+<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="baidumapv2/baidumap_offline_v2_load.js"></script>
+<script language="JavaScript">
+    var map;
+    $(document).ready(function() {
+        map = new BMap.Map("offlinemap");    // 创建Map实例
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), 5 );  // 初始化地图,设置中心点坐标和地图级别
+        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+        map.addControl(new BMap.NavigationControl());   //缩放按钮
+        map.setMinZoom(5);//设置最小缩放等级
+        //添加个大头针
+        var point = new BMap.Point( 116.404, 39.915 );
+        var dicon = new BMap.Icon( "mapding_red.png", new BMap.Size( 22, 40 ) );
+        var mk = new BMap.Marker( point, { icon: dicon, offset: new BMap.Size(0, -20 ) } );
+        setTimeout( function() {
+            map.panTo( point );
+        }, 200 );
+        map.addOverlay( mk );
+    });
+</script>
+</head>
+<body style="padding:0px;margin:0px;">
+    <div id="offlinemap"></div>
+</body>
+
+</html>
